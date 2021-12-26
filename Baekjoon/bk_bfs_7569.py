@@ -1,9 +1,10 @@
 from collections import deque
+import sys
 
 def bfs():
 
     while q:
-        x,y,z = q.popleft()
+        z,x,y = q.popleft()
 
         for k in range(6):
             nx = x + dx[k]
@@ -23,7 +24,7 @@ if __name__=='__main__':
 
     M,N,H = map(int,input().split())
 
-    graph = [list(map(int,input().split())) for _ in range(N*H)]
+    graph = [[list(map(int,input().split())) for _ in range(N)] for _ in range(H)]
 
     for h in range(H):
         for n in range(N):
@@ -36,7 +37,8 @@ if __name__=='__main__':
             for m in range(M):
                 if graph[h][n][m]==0:
                     print(-1)
-                    break
+                    sys.exit(0)
+                    # quit()
                 check = max(check,graph[h][n][m])
     if check==1:
         print(0)
