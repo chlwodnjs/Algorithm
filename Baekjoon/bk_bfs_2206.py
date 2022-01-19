@@ -5,15 +5,14 @@ def bfs():
     check_list[0][0][1] = 1
     while q:
         x, y, z = q.popleft()
-
+        if x == N - 1 and y == M - 1:
+            return check_list[x][y][z]
         for k in range(4):
             nx = x + dx[k]
             ny = y + dy[k]
 
             if 0 <= nx < N and 0 <= ny < M:
-                if nx == N - 1 and ny == M - 1:
-                    return check_list[x][y][z] + 1
-                elif graph[nx][ny] == 1 and z == 1:
+                if graph[nx][ny] == 1 and z == 1:
                     q.append((nx, ny, 0))
                     check_list[nx][ny][0] = check_list[x][y][1] + 1
                 elif graph[nx][ny] == 0 and check_list[nx][ny][z] == 0:
