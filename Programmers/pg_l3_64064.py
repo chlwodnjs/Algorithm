@@ -10,7 +10,9 @@ def solution(user_id, banned_id):
     for comb in combination:
         check = 0
         for i in range(check_length):
-            if not re.match(banned_id[i].replace('*', '.'), comb[i]):
+            cp = re.compile(banned_id[i].replace('*', '.'))
+            check_match = cp.match(comb[i])
+            if not check_match:
                 break
             elif len(banned_id[i]) != len(comb[i]):
                 break
