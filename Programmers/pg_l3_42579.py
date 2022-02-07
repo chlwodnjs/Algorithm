@@ -14,8 +14,9 @@ def solution(genres, plays):
         for i, (j, k) in enumerate(zip(genres, plays)):
             if x == j:
                 check.append([k, i])
-
-        check = sorted(check, key=lambda x: (-x[0], x[1]))
+        print(check)
+        check = sorted(check, key=lambda x: x[0], reverse=True)
+        print(check)
         answer.append(check[0][1])
         if len(check) != 1:
             answer.append(check[1][1])
