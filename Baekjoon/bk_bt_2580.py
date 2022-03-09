@@ -16,7 +16,6 @@ def is_check(i, j):
 
     return check
 
-
 def bt(x):
     if x == len(check_0):
         for row in graph:
@@ -30,7 +29,6 @@ def bt(x):
         graph[i][j] = num
         bt(x + 1)
         graph[i][j] = 0
-
 
 if __name__ == '__main__':
     graph = [list(map(int, input().split())) for _ in range(9)]
