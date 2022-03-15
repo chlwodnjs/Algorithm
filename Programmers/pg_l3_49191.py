@@ -1,6 +1,10 @@
 def solution(n, results):
     answer = 0
     graph = [[None] * n for _ in range(n)]
+
+    for i in range(n):
+        graph[i][i] = 0
+
     for i in results:
         graph[i[0] - 1][i[1] - 1] = 1
         graph[i[1] - 1][i[0] - 1] = 0
@@ -13,7 +17,7 @@ def solution(n, results):
                     graph[k][j] = not graph[j][i]
 
     for i in range(n):
-        if None not in graph[i][:i] + graph[i][i + 1:]:
+        if None not in graph[i]:
             answer += 1
 
     return answer
