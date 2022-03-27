@@ -1,12 +1,15 @@
 from collections import deque
-import copy
 
 
 def bfs():
     global result
-    cnt = 0
+    flag = 0
     q = deque()
-    copy_graph = copy.deepcopy(graph)
+    copy_graph = [[0] * M for _ in range(N)]
+    for i in range(N):
+        for j in range(M):
+            copy_graph[i][j] = graph[i][j]
+
     for i in range(N):
         for j in range(M):
             if copy_graph[i][j] == 2:
@@ -21,9 +24,11 @@ def bfs():
                 copy_graph[nx][ny] = 2
                 q.append((nx, ny))
 
-    for i in range(N):
-        cnt += copy_graph[i].count(0)
-    result = max(result, cnt)
+    for i in copy_graph:
+        for j in i:
+            if j == 0:
+                flag += 1
+    result = max(result, flag)
 
 
 def check(cnt):
