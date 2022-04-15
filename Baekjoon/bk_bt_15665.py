@@ -1,19 +1,19 @@
 def bt(x):
-    if x == M:
-        print(*graph)
+    if len(check) == M:
+        print(*check)
         return
     flag = 0
     for i in range(N):
-        if flag != check[i]:
-            graph.append(check[i])
-            flag = check[i]
-            bt(x + 1)
-            graph.pop()
+        if not flag == arr[i]:
+            check.append(arr[i])
+            flag = arr[i]
+            bt(x+1)
+            check.pop()
 
 
 if __name__ == '__main__':
     N, M = map(int, input().split())
-    check = list(map(int, input().split()))
-    check = sorted(check)
-    graph = []
+    arr = list(map(int, input().split()))
+    arr = sorted(arr)
+    check = []
     bt(0)
