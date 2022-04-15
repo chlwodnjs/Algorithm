@@ -1,16 +1,16 @@
 def bt(x):
-    if len(graph) == M:
-        print(*graph)
+    if x == M:
+        print(*check)
         return
     for i in range(N):
-        graph.append(check[i])
+        check.append(arr[i])
         bt(x + 1)
-        graph.pop()
+        check.pop()
 
 
 if __name__ == '__main__':
     N, M = map(int, input().split())
-    check = list(map(int, input().split()))
-    check = sorted(check)
-    graph = []
+    arr = list(map(int, input().split()))
+    arr = sorted(arr)
+    check = []
     bt(0)
