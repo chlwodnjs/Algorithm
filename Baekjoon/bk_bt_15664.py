@@ -1,23 +1,22 @@
 def bt(x):
-    if x==M:
-        if sorted(graph) == graph:
-            print(*graph)
-            return
-    flag=0
-    for i in range(N):
-        if not visit[i] and not flag==check[i]:
-            graph.append(check[i])
-            visit[i]=1
-            flag=check[i]
-            bt(x+1)
-            graph.pop()
-            visit[i]=0
+    if len(check) == M:
+        print(*check)
+        return
+    flag = 0
+    for i in range(x,N):
+        if not vis[i] and not flag == arr[i]:
+            check.append(arr[i])
+            flag = arr[i]
+            vis[i] = 1
+            bt(i)
+            vis[i] = 0
+            check.pop()
 
 
-if __name__ =='__main__':
-    N,M = map(int,input().split())
-    check = list(map(int,input().split()))
-    check = sorted(check)
-    graph = []
-    visit =[0]*N
+if __name__ == '__main__':
+    N, M = map(int, input().split())
+    arr = list(map(int, input().split()))
+    arr = sorted(arr)
+    check = []
+    vis = [0]*9
     bt(0)
