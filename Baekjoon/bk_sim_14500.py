@@ -4,7 +4,7 @@ input = sys.stdin.readline
 
 
 def dfs(x, y, check, flag):
-    global res, Mmax
+    global res
 
     vis[x][y] = 1
     if check == 3:
@@ -17,21 +17,12 @@ def dfs(x, y, check, flag):
         nx = x + dx[k]
         ny = y + dy[k]
         if 0 <= nx < N and 0 <= ny < M and not vis[nx][ny]:
+            if check == 1:
+                vis[nx][ny] = 1
+                dfs(x, y, check + 1, flag + graph[nx][ny])
+                vis[nx][ny] = 0
             dfs(nx, ny, check + 1, flag + graph[nx][ny])
             vis[nx][ny] = 0
-
-
-def mmod(x, y, graph):
-    global res
-    checkarr = []
-    for k in range(4):
-        nx = x + dx[k]
-        ny = y + dy[k]
-        if 0 <= nx < N and 0 <= ny < M:
-            checkarr.append(graph[nx][ny])
-    if len(checkarr) > 2:
-        flag = graph[x][y] + sum(sorted(checkarr, reverse=True)[:3])
-        res = max(res, flag)
 
 
 if __name__ == '__main__':
@@ -48,5 +39,4 @@ if __name__ == '__main__':
         for j in range(M):
             dfs(i, j, 0, graph[i][j])
             vis[i][j] = 0
-            mmod(i, j, graph)
     print(res)
