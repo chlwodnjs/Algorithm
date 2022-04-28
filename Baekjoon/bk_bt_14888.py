@@ -1,24 +1,22 @@
-def bt(x, a, c1, c2, c3, c4):
-    if x == N:
-        res.append(a)
+def bt(x, val, a, b, c, d):
+    if x == N - 1:
+        res.append(val)
         return
 
-    if c1:
-        bt(x + 1, a + check[x], c1-1, c2, c3, c4)
-    if c2:
-        bt(x + 1, a - check[x], c1, c2-1, c3, c4)
-    if c3:
-        bt(x + 1, a * check[x], c1, c2, c3-1, c4)
-    if c4:
-        bt(x + 1, int(a / check[x]), c1, c2, c3, c4-1)
+    if a:
+        bt(x + 1, val + num[x + 1], a - 1, b, c, d)
+    if b:
+        bt(x + 1, val - num[x + 1], a, b - 1, c, d)
+    if c:
+        bt(x + 1, val * num[x + 1], a, b, c - 1, d)
+    if d:
+        bt(x + 1, int(val / num[x + 1]), a, b, c, d - 1)
 
 
 if __name__ == '__main__':
     N = int(input())
-    check = list(map(int, input().split()))
-    cal = list(map(int, input().split()))
+    num = list(map(int, input().split()))
+    a, b, c, d = map(int, input().split())
     res = []
-    bt(1, check[0], cal[0], cal[1], cal[2], cal[3])
-    res = sorted(res)
-    print(res[-1])
-    print(res[0])
+    bt(0, num[0], a, b, c, d)
+    print(max(res), min(res))
