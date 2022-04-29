@@ -1,20 +1,22 @@
-from collections import deque
-
-
 def bfs():
-    L = len(q)
-    for _ in range(L):
-        x, y = q.popleft()
-        cnt = 0
-        for k in range(4):
-            nx = x + dx[k]
-            ny = y + dy[k]
-            if 0 <= nx < R and 0 <= ny < C:
-                if graph[x][y] and graph[nx][ny] != -1:
-                    q.append((nx, ny))
-                    graph[nx][ny] += graph[x][y] // 5
-                    cnt += 1
-        graph[x][y] -= (graph[x][y] // 5) * cnt
+    sp = [[0] * C for _ in range(R)]
+
+    for x in range(R):
+        for y in range(C):
+            cnt = 0
+            if graph[x][y] and graph[x][y] != -1:
+                for k in range(4):
+                    nx = x + dx[k]
+                    ny = y + dy[k]
+                    if 0 <= nx < R and 0 <= ny < C:
+                        if graph[nx][ny] != -1:
+                            sp[nx][ny] += graph[x][y] // 5
+                            cnt += 1
+                graph[x][y] -= (graph[x][y] // 5) * cnt
+
+    for i in range(R):
+        for j in range(C):
+            graph[i][j] += sp[i][j]
 
 
 def sim():
@@ -53,7 +55,6 @@ def sim():
 if __name__ == '__main__':
     R, C, T = map(int, input().split())
     graph = [list(map(int, input().split())) for _ in range(R)]
-    q = deque()
     dx = [1, 0, -1, 0]
     dy = [0, 1, 0, -1]
 
@@ -65,8 +66,6 @@ if __name__ == '__main__':
 
     for i in range(R):
         for j in range(C):
-            if graph[i][j]:
-                q.append((i, j))
             if graph[i][j] == -1:
                 clean.append(i)
 
@@ -77,6 +76,6 @@ if __name__ == '__main__':
     res = 0
     for i in range(R):
         for j in range(C):
-            if graph[i][j]:
+            if graph[i][j] != -1:
                 res += graph[i][j]
     print(res)
